@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -13,8 +14,6 @@ namespace CozyClothing
         private Color previousPantsColor;
         private int previousShoeColor;
 
-        private int skinColor;
-
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         public override void Entry(IModHelper helper)
@@ -27,7 +26,6 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
-            skinColor = Game1.player.skin.Value;
             ChangeShirtToPajamaShirt();
 
             Helper.Events.Player.Warped += OnWarped;
@@ -64,7 +62,7 @@ namespace CozyClothing
             Game1.player.changeShirt(9);
             Game1.player.changePantStyle(0);
             Game1.player.changePants(Color.DarkTurquoise);
-            Game1.player.changeShoeColor(skinColor); // 6 for blue shoes
+            Game1.player.changeShoeColor(6);
         }
     }
 }
