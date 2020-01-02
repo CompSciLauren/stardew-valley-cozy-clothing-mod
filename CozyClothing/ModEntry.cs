@@ -1,4 +1,5 @@
-﻿using StardewModdingAPI;
+﻿using Microsoft.Xna.Framework;
+using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 
@@ -8,6 +9,11 @@ namespace CozyClothing
     public class ModEntry : Mod
     {
         private int previousShirt;
+        private int previousPantStyle;
+        private Color previousPantsColor;
+        private int previousShoeColor;
+
+        private int skinColor;
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
@@ -21,6 +27,7 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
+            skinColor = Game1.player.skin.Value;
             ChangeShirtToPajamaShirt();
 
             Helper.Events.Player.Warped += OnWarped;
@@ -33,8 +40,11 @@ namespace CozyClothing
         {
             if (e.NewLocation is Farm && e.OldLocation is StardewValley.Locations.FarmHouse)
             {
-                // Change out of pajama shirt and back into previous shirt
+                // Change out of pajamas and back into previous clothes
                 Game1.player.changeShirt(previousShirt);
+                Game1.player.changePantStyle(previousPantStyle);
+                Game1.player.changePants(previousPantsColor);
+                Game1.player.changeShoeColor(previousShoeColor);
             }
             else if (e.NewLocation is StardewValley.Locations.FarmHouse)
             {
@@ -44,10 +54,17 @@ namespace CozyClothing
 
         private void ChangeShirtToPajamaShirt()
         {
-            // save current shirt to change back into later
+            // save current clothes to change back into later
             previousShirt = Game1.player.shirt.Value;
-            // change current shirt to be pajama shirt
-            Game1.player.changeShirt(10);
+            previousPantStyle = Game1.player.pants.Value;
+            previousPantsColor = Game1.player.pantsColor;
+            previousShoeColor = Game1.player.shoes.Value;
+
+            // change current clothes to be pajamas
+            Game1.player.changeShirt(9);
+            Game1.player.changePantStyle(0);
+            Game1.player.changePants(Color.DarkTurquoise);
+            Game1.player.changeShoeColor(skinColor); // 6 for blue shoes
         }
     }
 }
