@@ -63,28 +63,25 @@ namespace CozyClothing
 
             // change current clothes to be pajamas
             Game1.player.changePantStyle(0);
+            Game1.player.changeShoeColor(4);
 
             switch (Config.PajamaColor)
             {
                 case "Pink":
                     Game1.player.changeShirt(36);
                     Game1.player.changePants(Color.PaleVioletRed);
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Purple":
                     Game1.player.changeShirt(40);
                     Game1.player.changePants(Color.MediumPurple);
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Green":
                     Game1.player.changeShirt(96);
                     Game1.player.changePants(Color.LimeGreen);
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Water-Blue":
                     Game1.player.changeShirt(105);
                     Game1.player.changePants(Color.RoyalBlue);
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Blue":
                 default:
