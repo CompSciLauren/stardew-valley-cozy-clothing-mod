@@ -2,6 +2,7 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using StardewValley.Objects;
 
 namespace CozyClothing
 {
@@ -29,9 +30,25 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
-            ChangeIntoPajamas();
-
+            Helper.Events.GameLoop.DayStarted += OnDayStarted;
             Helper.Events.Player.Warped += OnWarped;
+            Helper.Events.GameLoop.DayEnding += OnDayEnding;
+        }
+
+        /// <summary>Raised after the day has started.</summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event data.</param>
+        private void OnDayStarted(object sender, DayStartedEventArgs e)
+        {
+            ChangeIntoPajamas();
+        }
+
+        /// <summary>Raised after the day is ending.</summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event data.</param>
+        private void OnDayEnding(object sender, DayEndingEventArgs e)
+        {
+            ChangeIntoRegularClothes();
         }
 
         /// <summary>Raised after the player enters a new location.</summary>
@@ -41,16 +58,21 @@ namespace CozyClothing
         {
             if (e.NewLocation is Farm && e.OldLocation is StardewValley.Locations.FarmHouse)
             {
-                // Change out of pajamas and back into previous clothes
-                Game1.player.changeShirt(previousShirt);
-                Game1.player.changePantStyle(previousPantStyle);
-                Game1.player.changePants(previousPantsColor);
-                Game1.player.changeShoeColor(previousShoeColor);
+                ChangeIntoRegularClothes();
             }
             else if (e.NewLocation is StardewValley.Locations.FarmHouse)
             {
                 ChangeIntoPajamas();
             }
+        }
+
+        private void ChangeIntoRegularClothes()
+        {
+            // Change out of pajamas and back into previous clothes
+            Game1.player.changeShirt(previousShirt);
+            Game1.player.changePantStyle(previousPantStyle);
+            Game1.player.changePants(previousPantsColor);
+            Game1.player.changeShoeColor(previousShoeColor);
         }
 
         private void ChangeIntoPajamas()
