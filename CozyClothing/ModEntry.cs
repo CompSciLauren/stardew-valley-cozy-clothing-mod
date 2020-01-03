@@ -2,7 +2,6 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
-using StardewValley.Objects;
 
 namespace CozyClothing
 {
@@ -66,6 +65,7 @@ namespace CozyClothing
             }
         }
 
+        /// <summary>Removes pajamas and replaces them with previously worn clothes.</summary>
         private void ChangeIntoRegularClothes()
         {
             // Change out of pajamas and back into previous clothes
@@ -75,6 +75,7 @@ namespace CozyClothing
             Game1.player.changeShoeColor(previousShoeColor);
         }
 
+        /// <summary>Removes current clothes and replaces them with pajamas.</summary>
         private void ChangeIntoPajamas()
         {
             // save current clothes to change back into later
