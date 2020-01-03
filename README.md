@@ -8,7 +8,7 @@
 
 Releases can be found at the following websites:
 
-- [NexusMods](https://www.nexusmods.com/stardewvalley/mods/4779)
+- [NexusMods](https://www.nexusmods.com/stardewvalley/mods/5093)
 
 ## Features
 
