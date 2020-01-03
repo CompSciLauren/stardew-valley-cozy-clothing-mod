@@ -2,7 +2,7 @@
   "Name": "Cozy Clothing",
   "Author": "CompSciLauren",
   "Version": "1.0.0",
-  "Description": "Adds cozy clothing and character wears pajamas when at home.",
+  "Description": "Character automatically wears pajamas when at home.",
   "UniqueID": "CompSciLauren.CozyClothing",
   "EntryDll": "CozyClothing.dll",
   "MinimumApiVersion": "2.10.0",
