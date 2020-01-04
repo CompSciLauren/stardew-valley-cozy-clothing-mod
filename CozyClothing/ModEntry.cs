@@ -11,6 +11,7 @@ namespace CozyClothing
         /// <summary>The mod configuration from the player.</summary>
         private ModConfig Config;
 
+        // previous clothes
         private int previousShirt;
         private int previousPantStyle;
         private Color previousPantsColor;
@@ -22,6 +23,7 @@ namespace CozyClothing
         {
             Config = Helper.ReadConfig<ModConfig>();
             Helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
+            Helper.Events.GameLoop.ReturnedToTitle += OnReturnedToTitle;
         }
 
         /// <summary>Raised after the save file is loaded.</summary>
@@ -32,6 +34,18 @@ namespace CozyClothing
             Helper.Events.GameLoop.DayStarted += OnDayStarted;
             Helper.Events.Player.Warped += OnWarped;
             Helper.Events.GameLoop.DayEnding += OnDayEnding;
+        }
+
+        /// <summary>Raised after the player returns to the title screen.</summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event data.</param>
+        private void OnReturnedToTitle(object sender, ReturnedToTitleEventArgs e)
+        {
+            Helper.Events.GameLoop.DayStarted -= OnDayStarted;
+            Helper.Events.Player.Warped -= OnWarped;
+            Helper.Events.GameLoop.DayEnding -= OnDayEnding;
+
+            ChangeIntoRegularClothes();
         }
 
         /// <summary>Raised after the day has started.</summary>

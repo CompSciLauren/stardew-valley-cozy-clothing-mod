@@ -2,7 +2,7 @@
     <img src="FeatureImage.png" alt="Feature Image">
 </h1>
 
-# Cozy Clothing v1.0.0
+# Cozy Clothing v1.0.1
 
 > A Stardew Valley mod that adds automatically changes your character's clothing to pajamas when at home.
 
