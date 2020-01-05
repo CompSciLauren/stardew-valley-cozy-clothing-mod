@@ -2,7 +2,7 @@
     <img src="FeatureImage.png" alt="Feature Image">
 </h1>
 
-# Cozy Clothing v1.0.1
+# Cozy Clothing v1.0.2
 
 > A Stardew Valley mod that adds automatically changes your character's clothing to pajamas when at home.
 
@@ -24,7 +24,7 @@ Releases can be found at the following websites:
 
 - Works with Stardew Valley 1.4 or later on Linux/Mac/Windows.
 - Works in both singleplayer and multiplayer.
-- No known mod conflicts.
+- Not compatible with Get Glam mod. Using both mods may lead to unexpected behavior. When this has been fixed, this warning will be removed. Thank you for your patience!
 
 ## Config
 
