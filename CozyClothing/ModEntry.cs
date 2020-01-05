@@ -73,7 +73,7 @@ namespace CozyClothing
             {
                 ChangeIntoRegularClothes();
             }
-            else if (e.NewLocation is StardewValley.Locations.FarmHouse)
+            else if (e.NewLocation is StardewValley.Locations.FarmHouse && e.OldLocation is Farm)
             {
                 ChangeIntoPajamas();
             }
