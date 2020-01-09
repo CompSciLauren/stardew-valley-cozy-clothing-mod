@@ -11,6 +11,8 @@ namespace CozyClothing
         /// <summary>The mod configuration from the player.</summary>
         private ModConfig Config;
 
+        private bool currentlyInPajamas = false;
+
         // previous clothes
         private int previousShirt;
         private int previousPantStyle;
@@ -45,7 +47,10 @@ namespace CozyClothing
             Helper.Events.Player.Warped -= OnWarped;
             Helper.Events.GameLoop.DayEnding -= OnDayEnding;
 
-            ChangeIntoRegularClothes();
+            if (currentlyInPajamas)
+            {
+                ChangeIntoRegularClothes();
+            }
         }
 
         /// <summary>Raised after the day has started.</summary>
@@ -53,7 +58,10 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnDayStarted(object sender, DayStartedEventArgs e)
         {
-            ChangeIntoPajamas();
+            if (!currentlyInPajamas)
+            {
+                ChangeIntoPajamas();
+            }
         }
 
         /// <summary>Raised after the day is ending.</summary>
@@ -61,7 +69,10 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnDayEnding(object sender, DayEndingEventArgs e)
         {
-            ChangeIntoRegularClothes();
+            if (currentlyInPajamas && Game1.currentLocation is StardewValley.Locations.FarmHouse)
+            {
+                ChangeIntoRegularClothes();
+            }
         }
 
         /// <summary>Raised after the player enters a new location.</summary>
@@ -69,11 +80,11 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnWarped(object sender, WarpedEventArgs e)
         {
-            if (e.NewLocation is Farm && e.OldLocation is StardewValley.Locations.FarmHouse)
+            if (e.NewLocation is Farm && e.OldLocation is StardewValley.Locations.FarmHouse && currentlyInPajamas)
             {
                 ChangeIntoRegularClothes();
             }
-            else if (e.NewLocation is StardewValley.Locations.FarmHouse && e.OldLocation is Farm)
+            else if (e.NewLocation is StardewValley.Locations.FarmHouse && e.OldLocation is Farm && !currentlyInPajamas)
             {
                 ChangeIntoPajamas();
             }
@@ -87,6 +98,8 @@ namespace CozyClothing
             Game1.player.changePantStyle(previousPantStyle);
             Game1.player.changePants(previousPantsColor);
             Game1.player.changeShoeColor(previousShoeColor);
+
+            currentlyInPajamas = false;
         }
 
         /// <summary>Removes current clothes and replaces them with pajamas.</summary>
@@ -127,6 +140,8 @@ namespace CozyClothing
                     Game1.player.changeShoeColor(6);
                     break;
             }
+
+            currentlyInPajamas = true;
         }
     }
 }
