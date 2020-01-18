@@ -6,5 +6,10 @@
   "UniqueID": "CompSciLauren.CozyClothing",
   "EntryDll": "CozyClothing.dll",
   "MinimumApiVersion": "2.10.0",
-  "UpdateKeys": [ "Nexus:5093", "GitHub:CompSciLauren/stardew-valley-cozy-clothing-mod" ]
+  "UpdateKeys": [ "Nexus:5093", "GitHub:CompSciLauren/stardew-valley-cozy-clothing-mod" ],
+  "Dependencies": [
+    {
+      "UniqueID": "spacechase0.JsonAssets" //"SpacePrincess.JA.PajamaPack"
+    }
+  ]
 }

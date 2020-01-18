@@ -2,21 +2,33 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
+using System.Collections.Generic;
 
 namespace CozyClothing
 {
+    public interface IJsonAssetsApi
+    {
+        void LoadAssets(string path);
+        int GetHatId(string name);
+        int GetClothingId(string name);
+        IDictionary<string, int> GetAllHatIds();
+        IDictionary<string, int> GetAllClothingIds();
+    }
+
     /// <summary>The mod entry point.</summary>
     public class ModEntry : Mod
     {
+        internal static IJsonAssetsApi JsonAssets;
+
         /// <summary>The mod configuration from the player.</summary>
         private ModConfig Config;
 
         private bool currentlyInPajamas = false;
 
         // previous clothes
-        private int previousShirt;
-        private int previousPantStyle;
-        private Color previousPantsColor;
+        private StardewValley.Objects.Hat previousHat;
+        private StardewValley.Objects.Clothing previousShirt;
+        private StardewValley.Objects.Clothing previousPants;
         private int previousShoeColor;
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
@@ -24,8 +36,19 @@ namespace CozyClothing
         public override void Entry(IModHelper helper)
         {
             Config = Helper.ReadConfig<ModConfig>();
+            Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
             Helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
             Helper.Events.GameLoop.ReturnedToTitle += OnReturnedToTitle;
+        }
+
+        private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+        {
+            JsonAssets = Helper.ModRegistry.GetApi<IJsonAssetsApi>("spacechase0.JsonAssets");
+            if (JsonAssets == null)
+            {
+                Monitor.Log("Can't access the Json Assets API. Is the mod installed correctly?");
+                return;
+            }
         }
 
         /// <summary>Raised after the save file is loaded.</summary>
@@ -33,6 +56,11 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnSaveLoaded(object sender, SaveLoadedEventArgs e)
         {
+            //Monitor.Log("CLOTHING IDS: ", LogLevel.Debug);
+            //foreach (var id in JsonAssets.GetAllClothingIds())
+            //    Monitor.Log($"{id.Key}: {id.Value}",
+            //        LogLevel.Debug);
+
             Helper.Events.GameLoop.DayStarted += OnDayStarted;
             Helper.Events.Player.Warped += OnWarped;
             Helper.Events.GameLoop.DayEnding += OnDayEnding;
@@ -94,10 +122,10 @@ namespace CozyClothing
         private void ChangeIntoRegularClothes()
         {
             // Change out of pajamas and back into previous clothes
-            Game1.player.changeShirt(previousShirt);
-            Game1.player.changePantStyle(previousPantStyle);
-            Game1.player.changePants(previousPantsColor);
-            Game1.player.changeShoeColor(previousShoeColor);
+            Game1.player.hat.Set(previousHat);
+            Game1.player.shirtItem.Set(previousShirt);
+            Game1.player.pantsItem.Set(previousPants);
+            Game1.player.shoes.Set(previousShoeColor);
 
             currentlyInPajamas = false;
         }
@@ -106,42 +134,77 @@ namespace CozyClothing
         private void ChangeIntoPajamas()
         {
             // save current clothes to change back into later
-            previousShirt = Game1.player.shirt.Value;
-            previousPantStyle = Game1.player.pants.Value;
-            previousPantsColor = Game1.player.pantsColor;
+            previousHat = Game1.player.hat.Value;
+            previousShirt = Game1.player.shirtItem.Value;
+            previousPants = Game1.player.pantsItem.Value;
             previousShoeColor = Game1.player.shoes.Value;
 
             // change current clothes to be pajamas
-            Game1.player.changePantStyle(0);
-            Game1.player.changeShoeColor(4);
-
             switch (Config.PajamaColor)
             {
+                case "Bear Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Bear Onesie Hat"), JsonAssets.GetClothingId("Bear Onesie Shirt"), JsonAssets.GetClothingId("Bear Onesie Pants"));
+                    break;
+                case "Blue Chicken Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Blue Chicken Onesie Hat"), JsonAssets.GetClothingId("Blue Chicken Onesie Shirt"), JsonAssets.GetClothingId("Blue Chicken Onesie Pants"));
+                    break;
+                case "Dog Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Dog Onesie Hat"), JsonAssets.GetClothingId("Dog Onesie Shirt"), JsonAssets.GetClothingId("Dog Onesie Pants"));
+                    break;
+                case "Elephant Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Elephant Onesie Hat"), JsonAssets.GetClothingId("Elephant Onesie Shirt"), JsonAssets.GetClothingId("Elephant Onesie Pants"));
+                    break;
+                case "Kitty Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Kitty Onesie Hat"), JsonAssets.GetClothingId("Kitty Onesie Shirt"), JsonAssets.GetClothingId("Kitty Onesie Pants"));
+                    break;
+                case "Panda Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Panda Onesie Hat"), JsonAssets.GetClothingId("Panda Bear Onesie Shirt"), JsonAssets.GetClothingId("Panda Bear Onesie Pants"));
+                    break;
+                case "Unicorn Onesie":
+                    SetPajamas(JsonAssets.GetHatId("Unicorn Onesie Hat"), JsonAssets.GetClothingId("Unicorn Onesie Shirt"), JsonAssets.GetClothingId("Unicorn Onesie Pants"));
+                    break;
                 case "Pink":
                     Game1.player.changeShirt(36);
                     Game1.player.changePants(Color.PaleVioletRed);
+                    Game1.player.changePantStyle(0);
+                    Game1.player.changeShoeColor(4);
                     break;
                 case "Purple":
                     Game1.player.changeShirt(40);
                     Game1.player.changePants(Color.MediumPurple);
+                    Game1.player.changePantStyle(0);
+                    Game1.player.changeShoeColor(4);
                     break;
                 case "Green":
                     Game1.player.changeShirt(96);
                     Game1.player.changePants(Color.LimeGreen);
+                    Game1.player.changePantStyle(0);
+                    Game1.player.changeShoeColor(4);
                     break;
                 case "Water-Blue":
                     Game1.player.changeShirt(105);
                     Game1.player.changePants(Color.RoyalBlue);
+                    Game1.player.changePantStyle(0);
+                    Game1.player.changeShoeColor(4);
                     break;
                 case "Blue":
                 default:
                     Game1.player.changeShirt(9);
                     Game1.player.changePants(Color.DarkTurquoise);
+                    Game1.player.changePantStyle(0);
                     Game1.player.changeShoeColor(6);
                     break;
             }
 
             currentlyInPajamas = true;
+        }
+
+        /// <summary>Sets the pajama clothes.</summary>
+        private void SetPajamas(int hatID, int shirtID, int pantsID)
+        {
+            Game1.player.hat.Set(new StardewValley.Objects.Hat(hatID));
+            Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(shirtID));
+            Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(pantsID));
         }
     }
 }
