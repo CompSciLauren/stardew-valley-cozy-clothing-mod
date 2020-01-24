@@ -143,64 +143,63 @@ namespace CozyClothing
             switch (Config.PajamaColor)
             {
                 case "Bear Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Bear Onesie Hat"), JsonAssets.GetClothingId("Bear Onesie Shirt"), JsonAssets.GetClothingId("Bear Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Bear Onesie Hat"), JsonAssets.GetClothingId("Bear Onesie Shirt"), JsonAssets.GetClothingId("Bear Onesie Pants"));
                     break;
                 case "Blue Chicken Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Blue Chicken Onesie Hat"), JsonAssets.GetClothingId("Blue Chicken Onesie Shirt"), JsonAssets.GetClothingId("Blue Chicken Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Blue Chicken Onesie Hat"), JsonAssets.GetClothingId("Blue Chicken Onesie Shirt"), JsonAssets.GetClothingId("Blue Chicken Onesie Pants"));
                     break;
                 case "Dog Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Dog Onesie Hat"), JsonAssets.GetClothingId("Dog Onesie Shirt"), JsonAssets.GetClothingId("Dog Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Dog Onesie Hat"), JsonAssets.GetClothingId("Dog Onesie Shirt"), JsonAssets.GetClothingId("Dog Onesie Pants"));
                     break;
                 case "Elephant Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Elephant Onesie Hat"), JsonAssets.GetClothingId("Elephant Onesie Shirt"), JsonAssets.GetClothingId("Elephant Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Elephant Onesie Hat"), JsonAssets.GetClothingId("Elephant Onesie Shirt"), JsonAssets.GetClothingId("Elephant Onesie Pants"));
                     break;
                 case "Kitty Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Kitty Onesie Hat"), JsonAssets.GetClothingId("Kitty Onesie Shirt"), JsonAssets.GetClothingId("Kitty Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Kitty Onesie Hat"), JsonAssets.GetClothingId("Kitty Onesie Shirt"), JsonAssets.GetClothingId("Kitty Onesie Pants"));
                     break;
                 case "Panda Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Panda Onesie Hat"), JsonAssets.GetClothingId("Panda Bear Onesie Shirt"), JsonAssets.GetClothingId("Panda Bear Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Panda Onesie Hat"), JsonAssets.GetClothingId("Panda Bear Onesie Shirt"), JsonAssets.GetClothingId("Panda Bear Onesie Pants"));
                     break;
                 case "Unicorn Onesie":
-                    SetPajamas(JsonAssets.GetHatId("Unicorn Onesie Hat"), JsonAssets.GetClothingId("Unicorn Onesie Shirt"), JsonAssets.GetClothingId("Unicorn Onesie Pants"));
+                    SetOnesiePajamas(JsonAssets.GetHatId("Unicorn Onesie Hat"), JsonAssets.GetClothingId("Unicorn Onesie Shirt"), JsonAssets.GetClothingId("Unicorn Onesie Pants"));
                     break;
                 case "Pink":
-                    Game1.player.changeShirt(36);
-                    Game1.player.changePants(Color.PaleVioletRed);
-                    Game1.player.changePantStyle(0);
-                    Game1.player.changeShoeColor(4);
+                    Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1036));
+                    Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
+                    Game1.player.pantsItem.Value.clothesColor.Value = Color.PaleVioletRed;
+                    Game1.player.shoes.Set(4);
                     break;
                 case "Purple":
-                    Game1.player.changeShirt(40);
-                    Game1.player.changePants(Color.MediumPurple);
-                    Game1.player.changePantStyle(0);
-                    Game1.player.changeShoeColor(4);
+                    Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1040));
+                    Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
+                    Game1.player.pantsItem.Value.clothesColor.Value = Color.MediumPurple;
+                    Game1.player.shoes.Set(4);
                     break;
                 case "Green":
-                    Game1.player.changeShirt(96);
-                    Game1.player.changePants(Color.LimeGreen);
-                    Game1.player.changePantStyle(0);
-                    Game1.player.changeShoeColor(4);
+                    Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1096));
+                    Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
+                    Game1.player.pantsItem.Value.clothesColor.Value = Color.LimeGreen;
+                    Game1.player.shoes.Set(4);
                     break;
                 case "Water-Blue":
-                    Game1.player.changeShirt(105);
-                    Game1.player.changePants(Color.RoyalBlue);
-                    Game1.player.changePantStyle(0);
-                    Game1.player.changeShoeColor(4);
+                    Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1105));
+                    Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
+                    Game1.player.pantsItem.Value.clothesColor.Value = Color.RoyalBlue;
+                    Game1.player.shoes.Set(4);
                     break;
                 case "Blue":
                 default:
-                    Game1.player.changeShirt(9);
-                    Game1.player.changePants(Color.DarkTurquoise);
-                    Game1.player.changePantStyle(0);
-                    Game1.player.changeShoeColor(6);
+                    Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1009));
+                    Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
+                    Game1.player.pantsItem.Value.clothesColor.Value = Color.DarkTurquoise;
+                    Game1.player.shoes.Set(6);
                     break;
             }
-
             currentlyInPajamas = true;
         }
 
         /// <summary>Sets the pajama clothes.</summary>
-        private void SetPajamas(int hatID, int shirtID, int pantsID)
+        private void SetOnesiePajamas(int hatID, int shirtID, int pantsID)
         {
             Game1.player.hat.Set(new StardewValley.Objects.Hat(hatID));
             Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(shirtID));
