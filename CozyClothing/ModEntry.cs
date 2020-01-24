@@ -29,7 +29,6 @@ namespace CozyClothing
         private StardewValley.Objects.Hat previousHat;
         private StardewValley.Objects.Clothing previousShirt;
         private StardewValley.Objects.Clothing previousPants;
-        private int previousShoeColor;
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
@@ -125,7 +124,6 @@ namespace CozyClothing
             Game1.player.hat.Set(previousHat);
             Game1.player.shirtItem.Set(previousShirt);
             Game1.player.pantsItem.Set(previousPants);
-            Game1.player.changeShoeColor(previousShoeColor);
 
             currentlyInPajamas = false;
         }
@@ -137,7 +135,6 @@ namespace CozyClothing
             previousHat = Game1.player.hat.Value;
             previousShirt = Game1.player.shirtItem.Value;
             previousPants = Game1.player.pantsItem.Value;
-            previousShoeColor = Game1.player.shoes.Value;
 
             // change current clothes to be pajamas
             switch (Config.PajamaColor)
@@ -167,32 +164,27 @@ namespace CozyClothing
                     Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1036));
                     Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
                     Game1.player.pantsItem.Value.clothesColor.Value = Color.PaleVioletRed;
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Purple":
                     Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1040));
                     Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
                     Game1.player.pantsItem.Value.clothesColor.Value = Color.MediumPurple;
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Green":
                     Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1096));
                     Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
                     Game1.player.pantsItem.Value.clothesColor.Value = Color.LimeGreen;
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Water-Blue":
                     Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1105));
                     Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
                     Game1.player.pantsItem.Value.clothesColor.Value = Color.RoyalBlue;
-                    Game1.player.changeShoeColor(4);
                     break;
                 case "Blue":
                 default:
                     Game1.player.shirtItem.Set(new StardewValley.Objects.Clothing(1009));
                     Game1.player.pantsItem.Set(new StardewValley.Objects.Clothing(0));
                     Game1.player.pantsItem.Value.clothesColor.Value = Color.DarkTurquoise;
-                    Game1.player.changeShoeColor(6);
                     break;
             }
             currentlyInPajamas = true;
