@@ -108,7 +108,7 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnWarped(object sender, WarpedEventArgs e)
         {
-            if (!(e.NewLocation is StardewValley.Locations.Cellar) && e.OldLocation is StardewValley.Locations.FarmHouse && currentlyInPajamas)
+            if (!(e.NewLocation is StardewValley.Locations.Cellar) && !(e.NewLocation is StardewValley.Locations.FarmHouse) && (e.OldLocation is StardewValley.Locations.FarmHouse || e.OldLocation is StardewValley.Locations.Cellar) && currentlyInPajamas)
             {
                 ChangeIntoRegularClothes();
             }
