@@ -9,6 +9,9 @@
 Releases can be found at the following websites:
 
 - [NexusMods](https://www.nexusmods.com/stardewvalley/mods/5093)
+- [Chucklefish](https://community.playstarbound.com/resources/cozy-clothing.5951/)
+- [CurseForge](https://www.curseforge.com/stardewvalley/mods/cozy-clothing)
+- [ModDrop](https://www.moddrop.com/stardew-valley/mods/755868-cozy-clothing)
 
 ## Features
 
