@@ -14,10 +14,10 @@ namespace CozyClothing
         private bool currentlyInPajamas = false;
 
         // previous clothes
-        private int previousShirt;
-        private int previousPantStyle;
+        private string previousShirt;
+        private string previousPantStyle;
         private Color previousPantsColor;
-        private int previousShoeColor;
+        private string previousShoeColor;
 
         /// <summary>The mod entry point, called after the mod is first loaded.</summary>
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
@@ -96,7 +96,7 @@ namespace CozyClothing
             // Change out of pajamas and back into previous clothes
             Game1.player.changeShirt(previousShirt);
             Game1.player.changePantStyle(previousPantStyle);
-            Game1.player.changePants(previousPantsColor);
+            Game1.player.changePantsColor(previousPantsColor);
             Game1.player.changeShoeColor(previousShoeColor);
 
             currentlyInPajamas = false;
@@ -108,36 +108,36 @@ namespace CozyClothing
             // save current clothes to change back into later
             previousShirt = Game1.player.shirt.Value;
             previousPantStyle = Game1.player.pants.Value;
-            previousPantsColor = Game1.player.pantsColor;
+            previousPantsColor = Game1.player.pantsColor.Value;
             previousShoeColor = Game1.player.shoes.Value;
 
             // change current clothes to be pajamas
-            Game1.player.changePantStyle(0);
-            Game1.player.changeShoeColor(4);
+            Game1.player.changePantStyle("0");
+            Game1.player.changeShoeColor("4");
 
             switch (Config.PajamaColor)
             {
                 case "Pink":
-                    Game1.player.changeShirt(36);
-                    Game1.player.changePants(Color.PaleVioletRed);
+                    Game1.player.changeShirt("1036");
+                    Game1.player.changePantsColor(Color.PaleVioletRed);
                     break;
                 case "Purple":
-                    Game1.player.changeShirt(40);
-                    Game1.player.changePants(Color.MediumPurple);
+                    Game1.player.changeShirt("1040");
+                    Game1.player.changePantsColor(Color.MediumPurple);
                     break;
                 case "Green":
-                    Game1.player.changeShirt(96);
-                    Game1.player.changePants(Color.LimeGreen);
+                    Game1.player.changeShirt("1096");
+                    Game1.player.changePantsColor(Color.LimeGreen);
                     break;
                 case "Water-Blue":
-                    Game1.player.changeShirt(105);
-                    Game1.player.changePants(Color.RoyalBlue);
+                    Game1.player.changeShirt("1105");
+                    Game1.player.changePantsColor(Color.RoyalBlue);
                     break;
                 case "Blue":
                 default:
-                    Game1.player.changeShirt(9);
-                    Game1.player.changePants(Color.DarkTurquoise);
-                    Game1.player.changeShoeColor(6);
+                    Game1.player.changeShirt("1009");
+                    Game1.player.changePantsColor(Color.DarkTurquoise);
+                    Game1.player.changeShoeColor("6");
                     break;
             }
 
