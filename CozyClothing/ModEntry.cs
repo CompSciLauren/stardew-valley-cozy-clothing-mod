@@ -58,7 +58,7 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnDayStarted(object sender, DayStartedEventArgs e)
         {
-            if (!currentlyInPajamas)
+            if (Game1.currentLocation is StardewValley.Locations.FarmHouse && !currentlyInPajamas)
             {
                 ChangeIntoPajamas();
             }
