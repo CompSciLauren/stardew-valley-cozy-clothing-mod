@@ -38,6 +38,16 @@ Releases can be found at the following websites:
 ## Contributors
 
 <!-- readme: contributors -start -->
+<table>
+<tr>
+    <td align="center">
+        <a href="https://github.com/CompSciLauren">
+            <img src="https://avatars.githubusercontent.com/u/25672237?v=4" width="100;" alt="CompSciLauren"/>
+            <br />
+            <sub><b>Lauren Vu</b></sub>
+        </a>
+    </td></tr>
+</table>
 <!-- readme: contributors -end -->
 
 If you're interested in contributing, please see [Contributing.md](./CONTRIBUTING.md). Thanks!
