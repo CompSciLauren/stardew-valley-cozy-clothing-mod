@@ -26,6 +26,41 @@ namespace CozyClothing
             Config = Helper.ReadConfig<ModConfig>();
             Helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
             Helper.Events.GameLoop.ReturnedToTitle += OnReturnedToTitle;
+            Helper.Events.GameLoop.GameLaunched += OnGameLaunched;
+        }
+
+        /// <summary>Raised after the game is launched, right before the first update tick.</summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event data.</param>
+        private void OnGameLaunched(object sender, GameLaunchedEventArgs e)
+        {
+            // add Generic Mod Config Menu integration
+            var gmcm = this.Helper.ModRegistry.Get("spacechase0.GenericModConfigMenu");
+            if (gmcm is null)
+            {
+                this.Monitor.Log("Generic Mod Config Menu not found - config menu will not be available", LogLevel.Debug);
+                return;
+            }
+
+            var gmcmApi = Helper.ModRegistry.GetApi<GenericModConfigMenuAPI>("spacechase0.GenericModConfigMenu");
+            if (gmcmApi != null)
+            {
+                gmcmApi.Register(ModManifest, Config.Reset, () => Helper.WriteConfig(Config));
+
+                gmcmApi.AddSectionTitle(ModManifest, () => "Pajama Settings");
+
+                gmcmApi.AddTextOption(
+                    mod: ModManifest,
+                    getValue: () => Config.PajamaColor,
+                    setValue: (string val) => Config.PajamaColor = val,
+                    name: () => "Pajama Color",
+                    tooltip: () => "Choose the color of your pajamas",
+                    allowedValues: new string[] { "Blue", "Water-Blue", "Pink", "Purple", "Green" },
+                    formatAllowedValue: (string val) => val
+                );
+
+                Monitor.Log("Added \"CozyClothing\" config menu with \"Generic Mod Config Menu\".", LogLevel.Info);
+            }
         }
 
         /// <summary>Raised after the save file is loaded.</summary>
