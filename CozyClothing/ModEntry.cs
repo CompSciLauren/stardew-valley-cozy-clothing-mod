@@ -58,9 +58,15 @@ namespace CozyClothing
         /// <param name="e">The event data.</param>
         private void OnDayStarted(object sender, DayStartedEventArgs e)
         {
-            if (Game1.currentLocation is StardewValley.Locations.FarmHouse && !currentlyInPajamas)
+            if (Game1.currentLocation is StardewValley.Locations.FarmHouse)
             {
-                ChangeIntoPajamas();
+                if (IsWeddingScheduledForToday() && currentlyInPajamas)
+                {
+                    ChangeIntoRegularClothes();
+                } else if (!IsWeddingScheduledForToday() && !currentlyInPajamas)
+                {
+                    ChangeIntoPajamas();
+                }
             }
         }
 
@@ -142,6 +148,18 @@ namespace CozyClothing
             }
 
             currentlyInPajamas = true;
+        }
+
+        /// <summary>Checks if a wedding is occurring.</summary>
+        /// <returns>True if a wedding is occurring, false otherwise.</returns>
+        private bool IsWeddingScheduledForToday()
+        {
+            if (Game1.CurrentEvent is not null && Game1.CurrentEvent.isWedding)
+            {
+                return true;
+            }
+            
+            return false;
         }
     }
 }
