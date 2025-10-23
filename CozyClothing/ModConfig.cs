@@ -1,9 +1,19 @@
-﻿class ModConfig
-{
-    public string PajamaColor { get; set; }
+﻿using StardewModdingAPI;
 
-    public ModConfig()
+namespace CozyClothing
+{
+    class ModConfig
     {
-        PajamaColor = "Blue";
+        public string PajamaColor { get; set; }
+
+        public ModConfig()
+        {
+            PajamaColor = "Blue";
+        }
+
+        public void Reset()
+        {
+            PajamaColor = "Blue";
+        }
     }
 }
