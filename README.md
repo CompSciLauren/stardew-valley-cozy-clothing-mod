@@ -2,7 +2,7 @@
     <img src="FeatureImage.png" alt="Feature Image">
 </h1>
 
-# Cozy Clothing v2.0.0
+# Cozy Clothing v2.2.0
 
 > A Stardew Valley mod that adds automatically changes your character's clothing to pajamas when at home.
 
@@ -33,7 +33,7 @@ Releases can be found at the following websites:
 
 | Configuration Description                                | Setting Options | Default Setting |
 | -------------------------------------------------------- | -------- | -------- |
-| PajamaColor | Blue, Water-Blue, Pink, Purple, Green   | Blue |
+| PajamaColor | Black, Black-Skull, Blue, Water-Blue, Pink, Purple, Orange, Green   | Blue |
 
 ## Contributors
 

@@ -55,7 +55,7 @@ namespace CozyClothing
                     setValue: (string val) => Config.PajamaColor = val,
                     name: () => "Pajama Color",
                     tooltip: () => "Choose the color of your pajamas",
-                    allowedValues: new string[] { "Blue", "Water-Blue", "Pink", "Purple", "Green" },
+                    allowedValues: new string[] { "Black", "Black-Skull", "Blue", "Water-Blue", "Pink", "Orange", "Purple", "Green" },
                     formatAllowedValue: (string val) => val
                 );
 
@@ -158,6 +158,14 @@ namespace CozyClothing
 
             switch (Config.PajamaColor)
             {
+                case "Black":
+                    Game1.player.changeShirt("1003");
+                    Game1.player.changePantsColor(Color.Black);
+                    break;
+                case "Black-Skull":
+                    Game1.player.changeShirt("1004");
+                    Game1.player.changePantsColor(Color.Black);
+                    break;
                 case "Pink":
                     Game1.player.changeShirt("1036");
                     Game1.player.changePantsColor(Color.PaleVioletRed);
@@ -165,6 +173,10 @@ namespace CozyClothing
                 case "Purple":
                     Game1.player.changeShirt("1040");
                     Game1.player.changePantsColor(Color.MediumPurple);
+                    break;
+                case "Orange":
+                    Game1.player.changeShirt("1149");
+                    Game1.player.changePantsColor(Color.Orange);
                     break;
                 case "Green":
                     Game1.player.changeShirt("1096");
